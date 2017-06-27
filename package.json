@@ -1,0 +1,33 @@
+{
+  "name": "g-legend",
+  "version": "0.0.1",
+  "description": "{DESCRIPTION}",
+  "keywords": [
+    "legend",
+    "d3",
+    "d3-module"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "build/g-legend.js",
+  "jsnext:main": "index",
+  "homepage": "https://github.com/ft-interactive/g-legend",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ft-interactive/g-legend.git"
+  },
+  "scripts": {
+    "pretest": "rm -rf build && mkdir build && rollup --globals d3:d3,g-chartcolour:gChartcolour -f umd -n gLegend -o build/g-legend.js -- index.js",
+    "test": "tape 'test/**/*-test.js'",
+    "prepublish": "npm run test && uglifyjs build/g-legend.js -c -m -o build/g-legend.min.js",
+    "postpublish": "zip -j build/g-legend.zip -- LICENSE README.md build/g-legend.js build/g-legend.min.js"
+  },
+  "dependencies": {
+    "d3": "^4.9.1",
+    "g-chartcolour": "github:ft-interactive/g-chartcolour"
+  },
+  "devDependencies": {
+    "rollup": "0.27",
+    "tape": "4",
+    "uglify-es": "^3.0.20"
+  }
+}
