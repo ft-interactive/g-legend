@@ -36,7 +36,7 @@ currentFrame.plot()
   .call(myLegend)
 ```
 
-Add these settings to set up your legend. The default for what the legend draws are your seriesNames. You can change this to whatever you want to, 
+Add these settings to set up your legend. The default for what the legend draws are your seriesNames, however you can change this to whatever you want to, 
 
 ```
 myLegend
