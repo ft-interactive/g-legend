@@ -19,11 +19,17 @@ let legendAlign = "vert"//hori or vert, alignment of the legend
 let legendType = 'rect' //rect, line or circ, geometry of legend marker
 ```
 
-Add this line of code to your index.html file, this will define your legend and add it to your chart plot
+Add this code to your index.html file, this will define your legend and add it to your chart plot. The default for what the legend draws are your seriesNames.
 
 ```
 const myLegend = gLegend.legend();
 
+myLegend
+  .seriesNames(seriesNames)
+  .geometry(legendType)
+  .rem(myChart.rem())
+  .alignment(legendAlign)
+  .colourPalette((frameName));  
 
 currentFrame.plot()
   .append("g")
@@ -34,17 +40,6 @@ currentFrame.plot()
   .append("g")
   .classed("legend",true)
   .call(myLegend)
-```
-
-Add these settings to set up your legend. The default for what the legend draws are your seriesNames, however you can change this to whatever you want to, 
-
-```
-myLegend
-  .seriesNames(seriesNames)
-  .geometry(legendType)
-  .rem(myChart.rem())
-  .alignment(legendAlign)
-  .colourPalette((frameName));    
 ```
 
     
