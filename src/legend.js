@@ -9,6 +9,7 @@ export default function drawLegend() {
         .range(gChartcolour.lineWeb)
         .domain(seriesNames);
     let rem = 10;
+    let frameName = '';
     let alignment = "hori";
     let geometry = "circ";
 
@@ -18,7 +19,7 @@ export default function drawLegend() {
         let legendyOffset = 0;
 
         parent.attr ("id",function(d,i){
-                    return "l" + i;
+                    return frameName + "-l" + i;
                 })
 
             parent.append("text")
@@ -61,12 +62,15 @@ export default function drawLegend() {
 
             parent.attr("transform",function(d,i){
                 if (alignment === 'hori') {
-                    var gHeigt = d3.select("#l0").node().getBBox().height;
+                    console.log(rem)
+                    var gHeigt = d3.select("#" + frameName + "-l0").node().getBBox().height;
                     if (i > 0) {
-                        var gWidth = d3.select("#l" + (i - 1)).node().getBBox().width + (rem * 1.25); 
+                        var gWidth = d3.select("#" + frameName + "-l" + (i - 1)).node().getBBox().width + (rem);
+                        console.log('width: ' + gWidth)
                     }
                     else {gWidth = 0};
                     legendyOffset = legendyOffset + gWidth;
+                        console.log('legendyOffset: ' +legendyOffset)
                     return "translate(" + (legendyOffset) + "," + (gHeigt/2) + ")";  
                 }
                 else {
@@ -85,6 +89,11 @@ export default function drawLegend() {
 
     legend.seriesNames = (d) => {
         seriesNames = d;
+        return legend;
+    }
+
+    legend.frameName = (d) => {
+        frameName = d;
         return legend;
     }
 
