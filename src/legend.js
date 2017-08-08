@@ -15,7 +15,7 @@ export default function drawLegend() {
 
 
     function legend(parent) {
-        if (seriesNames.length > 1) {  
+        if (seriesNames.length > 1) {
         let legendyOffset = 0;
 
         parent.attr ("id",function(d,i){
@@ -31,7 +31,7 @@ export default function drawLegend() {
                     return d;
                 })
 
-            if(geometry==='rect') {    
+            if(geometry==='rect') {
                 parent.append('rect')
                     .attr('width', rem * 1.25)
                     .attr('height', rem/1.5)
@@ -71,7 +71,7 @@ export default function drawLegend() {
                     else {gWidth = 0};
                     legendyOffset = legendyOffset + gWidth;
                         console.log('legendyOffset: ' +legendyOffset)
-                    return "translate(" + (legendyOffset) + "," + (gHeigt/2) + ")";  
+                    return "translate(" + (legendyOffset) + "," + (gHeigt/2) + ")";
                 }
                 else {
                         return "translate(0," + ((i * rem * 1.2)) + ")"};
@@ -85,7 +85,7 @@ export default function drawLegend() {
                 .on("drag", dragged)
                 .on("end", dragended));
       }
-   
+
 
     legend.seriesNames = (d) => {
         seriesNames = d;
@@ -100,7 +100,7 @@ export default function drawLegend() {
     legend.colourPalette = (d) => {
         if(d ==='social' || d ==='video') {
             colourScale.range(gChartcolour.lineSocial);
-        } else if (d ==='webS' || d ==='webM' || d ==='webL') {
+        } else if (d ==='webS' || d ==='webM' || d ==='webMDefault' || d ==='webL') {
             if(geometry === 'circ' || geometry === 'line') {
                 colourScale.range(gChartcolour.lineWeb);
             } else {
@@ -119,10 +119,10 @@ export default function drawLegend() {
         } else {
             return rem;
         }
-        
+
     }
 
-    
+
     legend.alignment = (d) => {
         alignment = d;
         return legend;
