@@ -85,8 +85,11 @@ export default function drawLegend() {
                 .on("drag", dragged)
                 .on("end", dragended));
 
-        parent.selectAll(".chart-subtitle")
-            .attr('id',frameName + 'legend')
+        let labels = parent.selectAll(".chart-subtitle")
+        labels.each(function (d) {
+            d3.select(this)
+            .attr("id",frameName + 'legend');
+        })
       }
 
 
