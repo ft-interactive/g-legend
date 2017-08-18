@@ -85,7 +85,7 @@ export default function drawLegend() {
                 .on("drag", dragged)
                 .on("end", dragended));
 
-        parent.selectAll(".chart-subtitle")
+        parent.selectAll(".chart-subtitle text")
             .attr('id',frameName + 'legend')
       }
 
