@@ -67,15 +67,12 @@
 
                 parent.attr("transform",function(d,i){
                     if (alignment === 'hori') {
-                        console.log(rem)
                         var gHeigt = d3.select("#" + frameName + "-l0").node().getBBox().height;
                         if (i > 0) {
                             var gWidth = d3.select("#" + frameName + "-l" + (i - 1)).node().getBBox().width + (rem);
-                            console.log('width: ' + gWidth)
                         }
                         else {gWidth = 0};
                         legendyOffset = legendyOffset + gWidth;
-                            console.log('legendyOffset: ' +legendyOffset)
                         return "translate(" + (legendyOffset) + "," + (gHeigt/2) + ")";
                     }
                     else {
