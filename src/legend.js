@@ -2,7 +2,6 @@ import * as d3 from 'd3';
 import gChartcolour from 'g-chartcolour';
 
 export default function drawLegend() {
-
     let seriesNames = [];
 
     const colourScale = d3.scaleOrdinal()
@@ -10,156 +9,142 @@ export default function drawLegend() {
         .domain(seriesNames);
     let rem = 10;
     let frameName = '';
-    let alignment = "hori";
-    let geometry = "circ";
+    let alignment = 'hori';
+    let geometry = 'circ';
 
 
     function legend(parent) {
         if (seriesNames.length > 1) {
-        let legendyOffset = 0;
+            let legendyOffset = 0;
 
-        parent.attr ("id",function(d,i){
-                    return frameName + "-l" + i;
-                })
+            parent.attr('id', (d, i) => `${frameName}-l${i}`);
 
-            parent.append("text")
-                .attr("id",(d,i) => ("t"+i))
-                .attr("x",rem * 1.5)
-                .attr("y",rem/3)
-                .attr("class","chart-subtitle")
-                .text(function(d){
-                    return d;
-                })
+            parent.append('text')
+                .attr('id', (d, i) => (`t${i}`))
+                .attr('x', rem * 1.5)
+                .attr('y', rem / 3)
+                .attr('class', 'chart-subtitle')
+                .text(d => d);
 
-            if(geometry==='rect') {
+            if (geometry === 'rect') {
                 parent.append('rect')
                     .attr('width', rem * 1.25)
-                    .attr('height', rem/1.5)
+                    .attr('height', rem / 1.5)
                     .attr('class', 'rects')
                     .attr('x', 0)
-                    .attr('y', -rem/3)
-                    .style('fill', (d) => colourScale(d))
+                    .attr('y', -rem / 3)
+                    .style('fill', d => colourScale(d));
+            } else if (geometry === 'line') {
+                parent.append('line')
+                    .attr('stroke', d => colourScale(d))
+                    .attr('x1', 0)
+                    .attr('x2', rem)
+                    .attr('y1', 0)
+                    .attr('y2', 0)
+                    .attr('class', 'lines');
+            } else if (geometry === 'circ') {
+                parent.append('circle')
+                    .style('fill', d => colourScale(d))
+                    .attr('cx', rem - (rem / 2.5))
+                    .attr('cy', 0)
+                    .attr('r', rem / 2.5)
+                    .attr('class', 'circs');
             }
 
-            else if(geometry === 'line') {
-                parent.append("line")
-                    .attr("stroke",(d) => colourScale(d))
-                    .attr("x1",0)
-                    .attr("x2",rem)
-                    .attr("y1",0)
-                    .attr("y2",0)
-                    .attr("class","lines")
-            }
-
-            else if(geometry === 'circ') {
-                parent.append("circle")
-                    .style("fill",(d) => colourScale(d))
-                    .attr("cx",rem - (rem/2.5))
-                    .attr("cy",0)
-                    .attr("r",rem/2.5)
-                    .attr("class","circs")
-            }
-
-            parent.attr("transform",function(d,i){
+            parent.attr('transform', (d, i) => {
+                let gWidth;
                 if (alignment === 'hori') {
-                    var gHeigt = d3.select("#" + frameName + "-l0").node().getBBox().height;
+                    const gHeigt = d3.select(`#${frameName}-l0`).node().getBBox().height;
                     if (i > 0) {
-                        var gWidth = d3.select("#" + frameName + "-l" + (i - 1)).node().getBBox().width + (rem);
+                        gWidth = d3.select(`#${frameName}-l${i - 1}`).node().getBBox().width + (rem);
+                    } else {
+                        gWidth = 0;
                     }
-                    else {gWidth = 0};
-                    legendyOffset = legendyOffset + gWidth;
-                    return "translate(" + (legendyOffset) + "," + (gHeigt/2) + ")";
+                    legendyOffset += gWidth;
+                    return `translate(${legendyOffset},${gHeigt / 2})`;
                 }
-                else {
-                        return "translate(0," + ((i * rem * 1.2)) + ")"};
-            })
+                return `translate(0,${i * rem * 1.2})`;
+            });
         }
 
-        d3.selectAll("#legend")
-            .on("mouseover",pointer)
+        d3.selectAll('#legend')
+            .on('mouseover', pointer)
             .call(d3.drag()
-                .on("start", dragstarted)
-                .on("drag", dragged)
-                .on("end", dragended));
+                .on('start', dragstarted)
+                .on('drag', dragged)
+                .on('end', dragended));
 
-        let labels = parent.selectAll(".chart-subtitle")
-        labels.each(function (d) {
+        const labels = parent.selectAll('.chart-subtitle');
+        labels.each(function setLabelIds() {
             d3.select(this)
-            .attr("id",frameName + 'legend');
-        })
-      }
-
+                .attr('id', `${frameName}legend`);
+        });
+    }
 
     legend.seriesNames = (d) => {
         seriesNames = d;
         return legend;
-    }
+    };
 
     legend.frameName = (d) => {
         frameName = d;
         return legend;
-    }
+    };
 
     legend.colourPalette = (d) => {
-        if(d ==='social' || d ==='video') {
+        if (d === 'social' || d === 'video') {
             colourScale.range(gChartcolour.lineSocial);
-        } else if (d ==='webS' || d ==='webM' || d ==='webMDefault' || d ==='webL') {
-            if(geometry === 'circ' || geometry === 'line') {
+        } else if (d === 'webS' || d === 'webM' || d === 'webMDefault' || d === 'webL') {
+            if (geometry === 'circ' || geometry === 'line') {
                 colourScale.range(gChartcolour.lineWeb);
             } else {
                 colourScale.range(gChartcolour.categorical_bar);
             }
-        } else if (d ==='print') {
+        } else if (d === 'print') {
             colourScale.range(gChartcolour.linePrint);
         }
         return legend;
-    }
+    };
 
     legend.rem = (d) => {
         if (d) {
             rem = d;
             return legend;
-        } else {
-            return rem;
         }
-
-    }
-
+        return rem;
+    };
 
     legend.alignment = (d) => {
         alignment = d;
         return legend;
-    }
+    };
 
     legend.geometry = (d) => {
         geometry = d;
         return legend;
-    }
+    };
 
-
-    function moveLegend() {
-        var dX = d3.event.x; // subtract cx
-        var dY = d3.event.y; // subtract cy
-        d3.select(this).attr("transform", "translate(" + dX + ", " + dY + ")");
+    function moveLegend() { // eslint-disable-line
+        const dX = d3.event.x; // subtract cx
+        const dY = d3.event.y; // subtract cy
+        d3.select(this).attr('transform', `translate(${dX}, ${dY})`);
     }
 
     function pointer() {
         this.style.cursor = 'pointer';
     }
 
-    function dragstarted(d) {
-      d3.select(this).raise().classed("active", true);
+    function dragstarted() {
+        d3.select(this).raise().classed('active', true);
     }
 
-    function dragged(d) {
-        d3.select(this).attr("transform", "translate(" + d3.event.x + ", " + d3.event.y + ")");
+    function dragged() {
+        d3.select(this).attr('transform', `translate(${d3.event.x}, ${d3.event.y})`);
     }
 
-    function dragended(d) {
-      d3.select(this).classed("active", false);
+    function dragended() {
+        d3.select(this).classed('active', false);
     }
-
 
     return legend;
-
-};
+}
