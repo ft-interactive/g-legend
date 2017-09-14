@@ -10,7 +10,7 @@
 
         let seriesNames = [];
 
-        const colourScale = d3.scaleOrdinal()
+        let colourScale = d3.scaleOrdinal()
             .range(gChartcolour.lineWeb)
             .domain(seriesNames);
         let rem = 10;
@@ -116,6 +116,10 @@
                 }
             } else if (d ==='print') {
                 colourScale.range(gChartcolour.linePrint);
+            } else if (d && d.name && d.name === 'scale') {
+                colourScale = d;
+            } else if (d === undefined) {
+                return colourScale;
             }
             return legend;
         }
