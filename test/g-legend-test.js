@@ -1,6 +1,6 @@
 import tape from 'tape';
 import * as d3 from 'd3';
-import { legend as glegend } from '../';
+import { legend as glegend } from '../index';
 
 tape('rem should equal 10.', (test) => {
     const legend = glegend();
