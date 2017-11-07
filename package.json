@@ -18,7 +18,7 @@
   },
   "scripts": {
     "pretest": "rm -rf build && mkdir build && rollup --globals d3:d3,g-chartcolour:gChartcolour -f umd -n gLegend -o build/g-legend.js -- index.js",
-    "test": "nyc tape --reporter=lcov 'test/**/*-test.js' | tap-spec",
+    "test": "nyc --reporter=lcov tape 'test/**/*-test.js' | tap-spec",
     "report-coverage": "nyc report --reporter=lcov | codecov",
     "prepublish": "npm run test && uglifyjs build/g-legend.js -c -m -o build/g-legend.min.js",
     "postpublish": "zip -j build/g-legend.zip -- LICENSE README.md build/g-legend.js build/g-legend.min.js"
