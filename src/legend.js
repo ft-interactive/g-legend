@@ -91,6 +91,12 @@ export default function drawLegend() {
         return legend;
     };
 
+    legend.colourScale = (d) => {
+        if (!d) return colourScale;
+        colourScale = d;
+        return legend;
+    };
+
     legend.colourPalette = (d) => {
         if (d === 'social' || d === 'video') {
             colourScale.range(gChartcolour.lineSocial);
