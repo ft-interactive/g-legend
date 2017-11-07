@@ -1,6 +1,6 @@
-const tape = require('tape');
-const glegend = require('../').legend;
-const d3 = require('d3');
+import tape from 'tape';
+import * as d3 from 'd3';
+import { legend as glegend } from '../';
 
 tape('rem should equal 10.', (test) => {
     const legend = glegend();
