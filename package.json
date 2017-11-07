@@ -10,6 +10,7 @@
   "license": "BSD-3-Clause",
   "main": "build/g-legend.js",
   "jsnext:main": "index",
+  "module": "index.js",
   "homepage": "https://github.com/ft-interactive/g-legend",
   "repository": {
     "type": "git",
@@ -17,7 +18,8 @@
   },
   "scripts": {
     "pretest": "rm -rf build && mkdir build && rollup --globals d3:d3,g-chartcolour:gChartcolour -f umd -n gLegend -o build/g-legend.js -- index.js",
-    "test": "tape 'test/**/*-test.js'",
+    "test": "nyc tape 'test/**/*-test.js'",
+    "report-coverage": "nyc report --reporter=lcov | codecov",
     "prepublish": "npm run test && uglifyjs build/g-legend.js -c -m -o build/g-legend.min.js",
     "postpublish": "zip -j build/g-legend.zip -- LICENSE README.md build/g-legend.js build/g-legend.min.js"
   },
@@ -26,6 +28,8 @@
     "g-chartcolour": "github:ft-interactive/g-chartcolour"
   },
   "devDependencies": {
+    "codecov": "^3.0.0",
+    "nyc": "^11.3.0",
     "rollup": "0.27",
     "tape": "4",
     "uglify-es": "^3.0.20"
