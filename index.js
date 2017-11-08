@@ -1,1 +1,4 @@
-  export { default as legend } from "./src/legend";
+/**
+ * g-legend
+ */
+export { default as legend } from './src/legend';
