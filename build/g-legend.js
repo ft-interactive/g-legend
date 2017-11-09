@@ -4,8 +4,6 @@
     (factory((global.gLegend = global.gLegend || {}),global.d3,global.gChartcolour));
 }(this, function (exports,d3,gChartcolour) { 'use strict';
 
-    gChartcolour = 'default' in gChartcolour ? gChartcolour['default'] : gChartcolour;
-
     function drawLegend() {
         let seriesNames = [];
 

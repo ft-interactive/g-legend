@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import gChartcolour from 'g-chartcolour';
+import * as gChartcolour from 'g-chartcolour';
 
 export default function drawLegend() {
     let seriesNames = [];
