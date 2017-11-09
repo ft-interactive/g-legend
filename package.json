@@ -18,19 +18,20 @@
   },
   "scripts": {
     "pretest": "rm -rf build && mkdir build && rollup --globals d3:d3,g-chartcolour:gChartcolour -f umd -n gLegend -o build/g-legend.js -- index.js",
-    "test": "nyc --reporter=lcov tape -r babel-register 'test/**/*-test.js' | tap-spec",
+    "test": "nyc --reporter=lcov --reporter=text tape -r '@babel/register' test/**/*.test.js | tap-spec",
     "report-coverage": "nyc report --reporter=lcov | codecov",
     "prepublish": "npm run test && uglifyjs build/g-legend.js -c -m -o build/g-legend.min.js",
     "postpublish": "zip -j build/g-legend.zip -- LICENSE README.md build/g-legend.js build/g-legend.min.js"
   },
   "dependencies": {
     "d3": "^4.9.1",
-    "g-chartcolour": "github:ft-interactive/g-chartcolour"
+    "g-chartcolour": "^0.8.17"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.31",
     "@babel/preset-env": "^7.0.0-beta.31",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "@babel/register": "^7.0.0-beta.31",
+    "ajv": "^5.3.0",
     "babel-register": "^6.26.0",
     "codecov": "^3.0.0",
     "eslint": "^4.10.0",
