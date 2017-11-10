@@ -116,7 +116,7 @@
                     colourScale.range(gChartcolour.categorical_bar);
                 }
             } else if (d === 'print') {
-                colourScale.range(gChartcolour.linePrint);
+                colourScale.range(gChartcolour.barPrint);
             } else if (d && d.name && d.name === 'scale') {
                 colourScale = d;
             } else if (d === undefined) {
