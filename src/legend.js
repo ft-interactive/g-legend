@@ -3,7 +3,7 @@ import * as gChartcolour from 'g-chartcolour';
 
 export default function drawLegend() {
     let seriesNames = [];
-
+    let forceLegend = false;
     let colourScale = d3.scaleOrdinal()
         .range(gChartcolour.lineWeb)
         .domain(seriesNames);
@@ -14,7 +14,7 @@ export default function drawLegend() {
 
 
     function legend(parent) {
-        if (seriesNames.length > 1) {
+        if (seriesNames.length > 1 || forceLegend === true) {
             let legendyOffset = 0;
 
             parent.attr('id', (d, i) => `${frameName}-l${i}`);
@@ -88,6 +88,12 @@ export default function drawLegend() {
 
     legend.frameName = (d) => {
         frameName = d;
+        return legend;
+    };
+
+    legend.forceLegend = (d) => {
+        if (d === undefined) return forceLegend;
+        forceLegend = d;
         return legend;
     };
 
