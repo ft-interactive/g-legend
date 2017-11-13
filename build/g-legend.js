@@ -116,7 +116,11 @@
                     colourScale.range(gChartcolour.categorical_bar);
                 }
             } else if (d === 'print') {
-                colourScale.range(gChartcolour.barPrint);
+                if (geometry === 'circ' || geometry === 'line') {
+                    colourScale.range(gChartcolour.linePrint);
+                } else {
+                    colourScale.range(gChartcolour.barPrint);
+                }
             } else if (d && d.name && d.name === 'scale') {
                 colourScale = d;
             } else if (d === undefined) {
