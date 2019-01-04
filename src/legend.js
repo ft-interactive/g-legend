@@ -67,12 +67,14 @@ export default function drawLegend() {
             });
         }
 
-        d3.selectAll('#legend')
-            .on('mouseover', pointer)
-            .call(d3.drag()
-                .on('start', dragstarted)
-                .on('drag', dragged)
-                .on('end', dragended));
+        if (typeof document !== 'undefined') {
+            d3.selectAll('#legend')
+                .on('mouseover', pointer)
+                .call(d3.drag()
+                    .on('start', dragstarted)
+                    .on('drag', dragged)
+                    .on('end', dragended));
+        }
 
         const labels = parent.selectAll('.chart-subtitle');
         labels.each(function setLabelIds() {
