@@ -1,3 +1,5 @@
+### FT IG tag-based npm publishing workflow v1
+
 version: 2
 references:
   default_container_config: &default_container_config
