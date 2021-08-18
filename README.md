@@ -1,4 +1,4 @@
-# g-legend [![codecov](https://codecov.io/gh/ft-interactive/g-legend/branch/master/graph/badge.svg)](https://codecov.io/gh/ft-interactive/g-legend)
+# g-legend [![codecov](https://codecov.io/gh/ft-interactive/g-legend/branch/main/graph/badge.svg)](https://codecov.io/gh/ft-interactive/g-legend)
 
 Pre styled and positioned legend for use with the FT's g-chartframe architecture as part of the Visual Vocabulary. As the name suggests it creates a legend that can be appended to the .plot obejct in the g-chartframe hopefully eliminating the need to code another standard legend for each template.
 
@@ -7,7 +7,7 @@ Pre styled and positioned legend for use with the FT's g-chartframe architecture
 Add this line of code to the head of your index.html file
 
 ``` html
-<script src="https://rawgit.com/ft-interactive/g-legend/master/build/g-legend.js"></script>
+<script src="https://rawgit.com/ft-interactive/g-legend/main/build/g-legend.js"></script>
 ```
 
 # Getting started
