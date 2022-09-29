@@ -23,7 +23,7 @@
     "report-coverage": "nyc report --reporter=lcov && codecov"
   },
   "dependencies": {
-    "d3": "^4.9.1",
+    "d3": "^7.6.1",
     "g-chartcolour": "^0.8.17"
   },
   "devDependencies": {
